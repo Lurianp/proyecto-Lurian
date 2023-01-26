@@ -14,17 +14,28 @@ and open the template in the editor.
        
         <script>
         function Verificar() {
-            var letra = document.getElementById("").value;
-           
-            if (var letra == "a") {
-               document.getElementById("resultado").innerHTML = "a";
+            var letra = document.getElementById("letra").value;
+            alert(letra);
+            if ((letra >= "a" ) && (letra <= "h")){
+               document.getElementById("resultado").innerHTML = 
+               document.getElementById("resultado").innerHTML + " " +  
+                    letra;
+              
             } else {
                 document.getElementById("resultado").innerHTML = "no se encuentra en la palabra)";
             }
         }
+        
+        function Vidas() {
+         if 
+        }
+
     </script>
     </head>
     <body>
+        onload="amagaimg()"
+        style="background-image: url('img/Desert.png');
+        background-size: 640px 480px: background repeat : no-repeat;"
         <header>
             <h1> Prototip joc del penjat </h1>
             
