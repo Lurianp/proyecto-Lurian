@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Lurian</title>
+        <meta charset="UTF-8">
+      
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+       
+        <script>
+            
+          var vides = 7; 
+            
+        function Verificar() {
+            var letra = document.getElementById("letra").value;          
+            
+        if ((letra >= "a" ) && (letra <= "h")) {
+              
+            document.getElementById("acierto").innerHTML = 
+            document.getElementById("acierto").innerHTML + " " + letra;
+              
+            } else {
+           
+            document.getElementById("fallo").innerHTML = 
+            document.getElementById("fallo").innerHTML + " " + letra; 
+                vides = vides - 1;
+               document.getElementById("vides").innerHTML = vides;
+               } 
+     
+                  
+          if (vides == 0) {
+            
+            
+            document.getElementById("vidascero").innerHTML = "GAME OVER";
+            document.getElementById("boton").disabled = true;
+            document.getElementById("lletra").disabled = true;
+            
+            }
+            }
+            
+                
+ 
+        
+            
+            
+        
+        
+           
+            
+        
+     
+           
+       
+        
+        
+
+    </script>
+    </head>
+    <body>
+        <header>
+            <h1> Prototip joc del penjat </h1>
+          
+            <div id="vidascero"></div>
+           
+
+            
+      
+            
+            
+            
+        <input type="text" id="letra">   
+        <button id="boton" onclick="Verificar()">Verificar</button>
+          <h2>Lletres correctes</h2>
+         <div id="acierto"></div>
+          <h2>Lletres fallides</h2>
+         <div id="fallo"></div>
+           <h2>Vides</h2>       
+        <div id="vides">7</div>
+        </header>
+      
+    </body>
+</html>
+html{
+background: 222;
+margin:auto;
+width:640px;
+height:480px;
+}
+
+body {
+background: linear-gradient( aaa 0,  ddd 10 px,  fff 55px);
+border: 1px solid black;
+padding: 10px 20px;
+box-shadow: 5px 0px 30px  000;
+border-radius : 8px;
+}
+
+ Audios { position:relative; top:-480px; left: 0px;}
+ 
+ HTML: 
+ <body onload="amagaimg()?; document.getElementById("mystery").play():"
+
