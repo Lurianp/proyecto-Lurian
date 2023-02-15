@@ -11,8 +11,10 @@ and open the template in the editor.
       
          <meta name="viewport" content="width=device-width, initial-scale=1.0">
        
+         <link rel="stylesheet" href="penjat.css">
+        
+             <script>
        
-        <script>
             
           var vides = 7; 
             
@@ -42,22 +44,18 @@ and open the template in the editor.
             
             }
             }
-            
-
- 
-        
     </script>
     </head>
-    <body>
+    <body style="background-image: url('img/Desert.png');
+          background-size: 640px 480px; background-repeat: no-repeat;">
         <header>
-            <h1> Prototip joc del penjat </h1>
+            <h1 style="color: #FFFF00 ;">Prototip joc del penjat</h1>
           
             <div id="vidascero"></div>
-           
-
-                  <input type="text" id="letra">   
+                       
+        <input type="text" id="letra">   
         <button id="boton" onclick="Verificar()">Verificar</button>
-          <h2>Lletres correctes</h2>
+          <h2 tyle="color: #9B2BFF ;">Lletres correctes</h2>
          <div id="acierto"></div>
           <h2>Lletres fallides</h2>
          <div id="fallo"></div>
@@ -66,13 +64,10 @@ and open the template in the editor.
         </header>
       
     </body>
-            
-      
-            
-     
-            
-      
+</html>
+
  
- 
+
+ onload="amagaimg()?; document.getElementById("mystery").play():"
 
 
