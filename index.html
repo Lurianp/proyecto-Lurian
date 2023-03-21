@@ -14,14 +14,29 @@ and open the template in the editor.
          <link rel="stylesheet" href="penjat.css">
         
              <script>
-       
-            
           var vides = 7; 
+          var palabras = ["cordes", "fetge", "forca", "jutges", "jutjat", "mengen", "penjat", "quinta", "setze"];
+          var aleatorio = palabras[Math.floor(Math.random() * palabras.length)];
+          var pos = palabra.indexof(letra);
+          var palabra = [];
+         
+          var letras = ["_", "_", "_", "_", "_", "_", "_"]
+          for (var i = 0; i < palabra.length; i++) (????? paraula [i] = "_";
+          
+          var pistas = ["A la quinta forca", "A ca un penjat no anomenis cordes"
+          , "Setze jutges d'un jutjat menjen fetge d'un penjat"];
+          
+          var palabraspistas = [1, 2, 0, 2, 2, 2, 1, 0, 2];
+          
+    var pista = pistas[palabraspistas[aleatorio]]
+    var palabra = palabras[aleatorio];    
+          
+   
             
         function Verificar() {
             var letra = document.getElementById("letra").value;          
             
-        if ((letra >= "a" ) && (letra <= "h")) {
+        if (pos >= 0) {
               
             document.getElementById("acierto").innerHTML = 
             document.getElementById("acierto").innerHTML + " " + letra;
