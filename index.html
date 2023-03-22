@@ -14,43 +14,49 @@ and open the template in the editor.
          <link rel="stylesheet" href="penjat.css">
         
              <script>
+          var Acertadas = []; 
           var vides = 7; 
           var palabras = ["cordes", "fetge", "forca", "jutges", "jutjat", "mengen", "penjat", "quinta", "setze"];
-          var aleatorio = palabras[Math.floor(Math.random() * palabras.length)];
-          var pos = palabra.indexof(letra);
-          var palabra = [];
-         
-          var letras = ["_", "_", "_", "_", "_", "_", "_"]
-          for (var i = 0; i < palabra.length; i++) (????? paraula [i] = "_";
+          var pistas = ["A la quinta forca", "A ca un penjat no anomenis cordes", "Setze jutges d'un jutjat menjen fetge d'un penjat"];
+          var falladas = ["_", "_", "_", "_", "_", "_", "_"]
           
-          var pistas = ["A la quinta forca", "A ca un penjat no anomenis cordes"
-          , "Setze jutges d'un jutjat menjen fetge d'un penjat"];
+          for (var i = 0; i < palabra.length; i++)  { Palabra[i] = "_"; }
           
           var palabraspistas = [1, 2, 0, 2, 2, 2, 1, 0, 2];
+         
+          var aleatorio = palabras[Math.floor(Math.random() * palabras.length)];
           
-    var pista = pistas[palabraspistas[aleatorio]]
+         
+          
+          
+          
+    var pista = pistas[palabraspistas[aleatorio]];
     var palabra = palabras[aleatorio];    
           
    
             
         function Verificar() {
             var letra = document.getElementById("letra").value;          
-            
-        if (pos >= 0) {
-              
-            document.getElementById("acierto").innerHTML = 
-            document.getElementById("acierto").innerHTML + " " + letra;
-              
-            } else {
-           
-            document.getElementById("fallo").innerHTML = 
-            document.getElementById("fallo").innerHTML + " " + letra; 
-                vides = vides - 1;
-               document.getElementById("vides").innerHTML = vides;
-               } 
-     
-                  
-          if (vides == 0) {
+            var pos = palabra.indexof(letra);
+            if (pos > -1) {  
+
+                document.getElementById("acierto").innerHTML = 
+                document.getElementById("acierto").innerHTML + " " + letra;
+
+            } else { 
+                if ((letra < "a" ) || (letra > "z")) {
+
+                     alert("caracter erroneo")
+
+                } else  {
+
+                    document.getElementById("fallo").innerHTML = 
+                    document.getElementById("fallo").innerHTML + " " + letra;
+                    vides = vides - 1;
+                    document.getElementById("vides").innerHTML = vides;
+                }
+            }
+        if (vides == 0) {
             
             
             document.getElementById("vidascero").innerHTML = "GAME OVER";
