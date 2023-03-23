@@ -15,38 +15,36 @@ and open the template in the editor.
         
              <script>
           var Acertadas = []; 
+          var Falladas = ["_", "_", "_", "_", "_", "_", "_"];
           var vides = 7; 
+
           var palabras = ["cordes", "fetge", "forca", "jutges", "jutjat", "mengen", "penjat", "quinta", "setze"];
           var pistas = ["A la quinta forca", "A ca un penjat no anomenis cordes", "Setze jutges d'un jutjat menjen fetge d'un penjat"];
-          var falladas = ["_", "_", "_", "_", "_", "_", "_"]
-          
-          for (var i = 0; i < palabra.length; i++)  { Palabra[i] = "_"; }
-          
           var palabraspistas = [1, 2, 0, 2, 2, 2, 1, 0, 2];
          
           var aleatorio = palabras[Math.floor(Math.random() * palabras.length)];
+          var palabra = palabras[aleatorio];   
+          var pista = pistas[palabraspistas[aleatorio]];
           
-         
-          
-          
-          
-    var pista = pistas[palabraspistas[aleatorio]];
-    var palabra = palabras[aleatorio];    
-          
-   
-            
+          for (var i = 0; i < palabra.length; i++)  { Acertadas[i] = "_"; }
+       
         function Verificar() {
-            var letra = document.getElementById("letra").value;          
-            var pos = palabra.indexof(letra);
+            
+            var letra = document.getElementById("letra").value;     
+            var pos = palabra.indexOf(letra);
+            window.alert("boton");
             if (pos > -1) {  
-
+      
                 document.getElementById("acierto").innerHTML = 
                 document.getElementById("acierto").innerHTML + " " + letra;
+                for (var i = pos; i < palabra.length; i++) {
+                if (palabra[i] == lletra){ Acertadas[i] = letra; } }
+                document.getElementById("acierto").innerHTML = Acertadas;
 
             } else { 
                 if ((letra < "a" ) || (letra > "z")) {
 
-                     alert("caracter erroneo")
+                     alert("caracter erroneo");
 
                 } else  {
 
