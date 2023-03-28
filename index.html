@@ -22,7 +22,7 @@ and open the template in the editor.
           var pistas = ["A la quinta forca", "A ca un penjat no anomenis cordes", "Setze jutges d'un jutjat menjen fetge d'un penjat"];
           var palabraspistas = [1, 2, 0, 2, 2, 2, 1, 0, 2];
          
-          var aleatorio = palabras[Math.floor(Math.random() * palabras.length)];
+          var aleatorio = Math.floor(Math.random() * palabras.length);
           var palabra = palabras[aleatorio];   
           var pista = pistas[palabraspistas[aleatorio]];
           
@@ -32,28 +32,33 @@ and open the template in the editor.
             
             var letra = document.getElementById("letra").value;     
             var pos = palabra.indexOf(letra);
-            window.alert("boton");
             if (pos > -1) {  
-      
+            var letrra = letra;
                 document.getElementById("acierto").innerHTML = 
                 document.getElementById("acierto").innerHTML + " " + letra;
                 for (var i = pos; i < palabra.length; i++) {
-                if (palabra[i] == lletra){ Acertadas[i] = letra; } }
+                if (palabra[i] == letra){ Acertadas[i] = letra; } }
                 document.getElementById("acierto").innerHTML = Acertadas;
 
             } else { 
                 if ((letra < "a" ) || (letra > "z")) {
 
                      alert("caracter erroneo");
-
+                
                 } else  {
-
+                  
+                  
                     document.getElementById("fallo").innerHTML = 
                     document.getElementById("fallo").innerHTML + " " + letra;
                     vides = vides - 1;
                     document.getElementById("vides").innerHTML = vides;
+                      
+                
                 }
             }
+            
+              
+                
         if (vides == 0) {
             
             
