@@ -30,10 +30,16 @@ and open the template in the editor.
        
         function Verificar() {
             
-            var letra = document.getElementById("letra").value;     
+            var letra = document.getElementById("letra").value;
+            
+            if ((Acertadas.indexOf(letra) > -1) || (Falladas.indexOf(letra) > -1)) {
+                alert("letra repetida");
+                
+            } else {
+            
             var pos = palabra.indexOf(letra);
             if (pos > -1) {  
-            var letrra = letra;
+            
                 document.getElementById("acierto").innerHTML = 
                 document.getElementById("acierto").innerHTML + " " + letra;
                 for (var i = pos; i < palabra.length; i++) {
@@ -45,19 +51,21 @@ and open the template in the editor.
 
                      alert("caracter erroneo");
                 
-                } else  {
+                }
+               
+                
+            else  {
                   
-                  
+                 
+   
                     document.getElementById("fallo").innerHTML = 
                     document.getElementById("fallo").innerHTML + " " + letra;
                     vides = vides - 1;
                     document.getElementById("vides").innerHTML = vides;
-                      
-                
+                                   
                 }
             }
-            
-              
+        }
                 
         if (vides == 0) {
             
