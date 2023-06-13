@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Lurian</title>
+        <meta charset="UTF-8">
+      
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+         <link rel="stylesheet" href="penjat.css">
+        
+         
+         <!--
+         Libreria para la carga de base de datoa
+         -->        
+        <script src="js/alasql.js"></script>
+        <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+        <script src="js/sql-wasm.js"></script>
+  
+    <script>
+    const Idiomes = [
+                {
+            "IdIdioma": "ca",
+            "Titol": "Versió amb Estructures de Dades Joc del Penjat",
+            "Versio": "Versió β Joc del Penjat",
+            "Input": "Escriu una lletra minúscula",
+            "Pregunta": "Anam a la quinta forca?",
+            "Comprovar": "Comprovar",
+            "Paraula": "Paraula:",
+            "Sopes": "Demanes sopes?",
+            "Pista": "Pista",
+            "Vides": "Vides:",
+            "Moix": "Un moix en té set?",
+            "Lletres": "Lletres:",
+            "Ets": "Ets de lletres?",
+            "URLpistes": "URLpistes:",
+            "Dita": "Dita",
+            "Dita1": "A la quinta forca, ",
+            "Dita2": "A ca un penjat, no hi anomenis cordes, ",
+            "Dita3": "Setze jutges d'un jutjat mengen fetge d'un penjat, …",
+            "Credits": "Crèdits:",
+            "YouTube": "Joc Penjat on Scratch",
+            "Wikis": "Penjat",
+            "Idioma": "en Català",
+            "Diccionari": "Diccionari",
+            "Teclat": "Mostra o Amaga",
+            "Incorrecte": "Caràcter incorrecte!",
+            "Repetida": "Lletra repetida!",
+            "Encertat": "Has encertat!",
+            "Guanyat": "i has guanyat!",
+            "Fallat": "Has fallat!",
+            "Perdut": "i has perdut!",
+            "Descansi": "En pau descansi – RIP!",
+            "Puntuacio": "Puntuació:"
+        },
+        {
+            "IdIdioma": "es",
+            "Titol": "Versión con Estructuras de Datos Juego del Ahorcado",
+            "Versio": "Versión β Juego del Ahorcado",
+            "Input": "Escribe una letra minúscula",
+            "Pregunta": "Vamos al quinto pino?",
+            "Comprovar": "Comprobar",
+            "Paraula": "Palabra:",
+            "Sopes": "Te rindes?",
+            "Pista": "Pista",
+            "Vides": "Vidas:",
+            "Moix": "Un gato tiene siete?",
+            "Lletres": "Letras:",
+            "Ets": "Eres de letras?",
+            "URLpistes": "URLpistas:",
+            "Dita": "Dicho",
+            "Dita1": "Al quinto pino, ",
+            "Dita2": "En casa de un ahorcado, no hables de cuerdas,",
+            "Dita3": "Dieciséis jueces de un juzgado comen hígado de un ahorcado, …",
+            "Credits": "Crèditos:",
+            "YouTube": "Juego Ahorcado on Scratch",
+            "Wikis": "Ahorcado",
+            "Idioma": "en Español",
+            "Diccionari": "Diccionario",
+            "Teclat": "Muestra o Esconde",
+            "Incorrecte": "Carácter incorrecto!",
+            "Repetida": "Letra repetida!",
+            "Encertat": "Has acertado!",
+            "Guanyat": "y has ganado!",
+            "Fallat": "Has fallado!",
+            "Perdut": "y has perdido!",
+            "Descansi": "En paz descanse - RIP!",
+            "Puntuacio": "Puntuación:"
+        },
+        {
+            "IdIdioma": "en",
+            "Titol": "Hangman Game Images and Sounds Version",
+            "Versio": "Hangman Game β Versión",
+            "Input": "Write a lowercase letter",
+            "Pregunta": "Are we going to the boondocks?",
+            "Comprovar": "Check it",
+            "Paraula": "Word:",
+            "Sopes": "You give up?",
+            "Pista": "Clue",
+            "Vides": "Lives:",
+            "Moix": "A cat has seven?",
+            "Lletres": "Letters:",
+            "Ets": "Are you in liberal arts?",
+            "URLpistes": "URLclues:",
+            "Dita": "Saying",
+            "Dita1": "To the boondocks,",
+            "Dita2": "In a hanged man's home, don't talk about ropes,",
+            "Dita3": "Sixteen judges of a court eat the liver of a hangman, …",
+            "Credits": "Credits:",
+            "YouTube": "Hangman Game on Scratch",
+            "Wikis": "Hangman",
+            "Idioma": "in English",
+            "Diccionari": "Dictionary",
+            "Teclat": "Show or Hide",
+            "Incorrecte": "Wrong character!",
+            "Repetida": "Repeated letter!",
+            "Encertat": "You're right!",
+            "Guanyat": "and you have won!",
+            "Fallat": "You have failed!",
+            "Perdut": "and you have lost!",
+            "Descansi": "Rest in peace - RIP!",
+            "Puntuacio": "Score:"
+        }
+    ];
+    
+    
+    
+          var Acertadas = []; 
+          var Falladas = ["_", "_", "_", "_", "_", "_", "_"];
+          var vides = 7; 
+          var palabras = ["cordes", "fetge", "forca", "jutges", "jutjat", "mengen", "penjat", "quinta", "setze"];
+          var pistas = ["A la quinta forca", "A ca un penjat no anomenis cordes", "Setze jutges d'un jutjat menjen fetge d'un penjat"];
+          var palabraspistas = [1, 2, 0, 2, 2, 2, 1, 0, 2];
+         
+          var aleatorio = Math.floor(Math.random() * palabras.length);
+          var palabra = palabras[aleatorio];   
+          var pista = pistas[palabraspistas[aleatorio]];
+          
+          for (var i = 0; i < palabra.length; i++)  { Acertadas[i] = "_"; }
+       
+        function Verificar() { 
+           
+       
+        
+            var letra = document.getElementById("letra").value;
+    
+            if ((Acertadas.indexOf(letra) > -1) || (Falladas.indexOf(letra) > -1)) { 
+                alert("letra repetida");
+                
+            } else {
+            
+            var pos = palabra.indexOf(letra);
+            if (pos > -1) {  
+            
+                // document.getElementById("acierto").innerHTML = 
+                // document.getElementById("acierto").innerHTML + " " + letra;
+                for (var i = pos; i < palabra.length; i++) {
+                if (palabra[i] == letra){ Acertadas[i] = letra; } }
+                document.getElementById("acierto").innerHTML = Acertadas;
+
+            } else { 
+                if ((letra < "a" ) || (letra > "z")) {
+
+                     alert("caracter erroneo");
+                
+                }
+               
+                
+            else  {
+                  
+                    // document.getElementById("fallo").innerHTML = 
+                    // document.getElementById("fallo").innerHTML + " " + letra;
+                    Falladas[7 - vides] = letra; 
+                    document.getElementById("fallo").innerHTML = Falladas;
+            
+                    vides = vides - 1;
+                    document.getElementById("vides").innerHTML = vides;
+                                   
+                }
+            }
+        }
+                
+        if (vides == 0) {
+            
+            
+            document.getElementById("vidascero").innerHTML = "GAME OVER";
+            document.getElementById("boton").disabled = true;
+            document.getElementById("lletra").disabled = true;
+            
+            }
+            }
+            
+            function Muestraimg() {
+             
+        
+                 if (vides == 7) {
+            
+                document.getElementById("ahorcado_6").hidden = false;
+                document.getElementById("ahorcado_5").hidden = true;
+                document.getElementById("ahorcado_4").hidden = true;
+                document.getElementById("ahorcado_3").hidden = true;
+                document.getElementById("ahorcado_2").hidden = true;
+                document.getElementById("ahorcado_1").hidden = true;
+                document.getElementById("ahorcado_0").hidden = true;
+            
+            
+            }
+                if (vides == 6) {
+            
+                document.getElementById("ahorcado_6").hidden = true;
+                document.getElementById("ahorcado_5").hidden = false;
+                document.getElementById("ahorcado_4").hidden = true;
+                document.getElementById("ahorcado_3").hidden = true;
+                document.getElementById("ahorcado_2").hidden = true;
+                document.getElementById("ahorcado_1").hidden = true;
+                document.getElementById("ahorcado_0").hidden = true;
+            
+            
+            }
+                
+                if (vides == 5) {
+            
+                document.getElementById("ahorcado_6").hidden = true;
+                document.getElementById("ahorcado_5").hidden = true;
+                document.getElementById("ahorcado_4").hidden = false;
+                document.getElementById("ahorcado_3").hidden = true;
+                document.getElementById("ahorcado_2").hidden = true;
+                document.getElementById("ahorcado_1").hidden = true;
+                document.getElementById("ahorcado_0").hidden = true;
+            
+            
+            }
+                
+                
+                if (vides == 4) {
+            
+                document.getElementById("ahorcado_6").hidden = true;
+                document.getElementById("ahorcado_5").hidden = true;
+                document.getElementById("ahorcado_4").hidden = true;
+                document.getElementById("ahorcado_3").hidden = false;
+                document.getElementById("ahorcado_2").hidden = true;
+                document.getElementById("ahorcado_1").hidden = true;
+                document.getElementById("ahorcado_0").hidden = true;
+            
+            
+            }
+                
+                if (vides == 3) {
+            
+                document.getElementById("ahorcado_6").hidden = true;
+                document.getElementById("ahorcado_5").hidden = true;
+                document.getElementById("ahorcado_4").hidden = true;
+                document.getElementById("ahorcado_3").hidden = false;
+                document.getElementById("ahorcado_2").hidden = true;
+                document.getElementById("ahorcado_1").hidden = true;
+                document.getElementById("ahorcado_0").hidden = true;
+            
+            
+            }
+                if (vides == 2) {
+            
+                document.getElementById("ahorcado_6").hidden = true;
+                document.getElementById("ahorcado_5").hidden = true;
+                document.getElementById("ahorcado_4").hidden = true;
+                document.getElementById("ahorcado_3").hidden = true;
+                document.getElementById("ahorcado_2").hidden = false;
+                document.getElementById("ahorcado_1").hidden = true;
+                document.getElementById("ahorcado_0").hidden = true;
+            
+            
+            }
+                 if (vides == 1) {
+            
+                document.getElementById("ahorcado_6").hidden = true;
+                document.getElementById("ahorcado_5").hidden = true;
+                document.getElementById("ahorcado_4").hidden = true;
+                document.getElementById("ahorcado_3").hidden = true;
+                document.getElementById("ahorcado_2").hidden = true;
+                document.getElementById("ahorcado_1").hidden = false;
+                document.getElementById("ahorcado_0").hidden = true;
+            
+            
+            }
+                if (vides == 0) {
+            
+                document.getElementById("ahorcado_6").hidden = true;
+                document.getElementById("ahorcado_5").hidden = true;
+                document.getElementById("ahorcado_4").hidden = true;
+                document.getElementById("ahorcado_3").hidden = true;
+                document.getElementById("ahorcado_2").hidden = true;
+                document.getElementById("ahorcado_1").hidden = true;
+                document.getElementById("ahorcado_0").hidden = false;
+            
+            
+            }
+            }
+
+    
+        function Canviaridioma(IdIdioma) {
+           Idioma = idiomes.find(Idioma => Idioma.IdIdioma == IdIdioma);
+           document.title = Idioma.Titol;
+           document.getElementById("Versio").innerHTML = Idioma.Versio;
+           document.getElementById("lletra").placeholder = Idioma.Input;
+           document.getElementById("comprovar").innerHTML = Idioma.Comprovar;
+           document.getElementById("Paraula").innerHTML = Idioma.Paraula;
+           document.getElementById("Sopes").innerHTML = Idioma.Sopes;
+           document.getElementById("pista").innerHTML = Idioma.pista;
+           document.getElementById("Vides").innerHTML = Idioma.Vides;
+           document.getElementById("Moix").innerHTML = Idioma.Moix;
+           document.getElementById("Lletres").innerHTML = Idioma.Lletres;
+           document.getElementById("Ets").innerHTML = Idioma.Ets;
+           document.getElementById("URLpistes").innerHTML = Idioma.URLpistes ;
+           document.getElementById("Dita1").title = Idioma.Dita1;
+           document.getElementById("Dita-1").innerHTML = Idioma.Dita + " 1";
+           document.getElementById("Dita2").title = Idioma.Dita2;
+           document.getElementById("Dita-2").innerHTML = Idioma.Dita + " 2";
+           document.getElementById("Dita3").title = Idioma.Dita3;
+           document.getElementById("Dita-3").innerHTML = Idioma.Dita + " 3";
+           document.getElementById("Credits").innerHTML = Idioma.Credits;
+           document.getElementById("Scratch").innerHTML = Idioma.YouTube;
+           document.getElementById("YouTube").innerHTML = Idioma.YouTube;
+           document.getElementById("teclat").title = Idioma.Teclat;
+            
+           
+            
+            
+            
+            
+        }
+            
+            
+            
+            
+            
+    </script>
+    </head>
+    <body style="background-image: url('img/Desert.png');
+          background-size: 640px 480px; background-repeat: no-repeat;">
+        <header>
+            <h1 style="color: #FFFF00 ;">Joc del penjat</h1>
+          
+            <div id="vidascero"></div>
+                       
+        <input type="text" id="letra">   
+        <button id="boton" onclick="Verificar()">Verificar</button>
+          <h2 tyle="color: #9B2BFF ;">Lletres correctes</h2>
+         <div id="acierto"></div>
+          <h2>Lletres fallides</h2>
+         <div id="fallo"></div>
+           <h2>Vides</h2>       
+        <div id="vides">7</div>
+        </header>
+      
+    </body>
+</html>
+
+ 
